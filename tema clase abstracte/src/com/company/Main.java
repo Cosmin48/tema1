@@ -21,13 +21,16 @@ abstract class Echipa{
     private String nume;
     private int numarMaximMembri;
     private int numarMembriCurenti;
-    private Membru lider;
+    public Membru lider;
     public Membru[]membri=new Membru[numarMaximMembri];
     public Echipa(String nume, int numarMaximMembri){
         this.nume=nume;
         this.numarMaximMembri=numarMaximMembri;
     }
-
+    public int getNumarAniExperienta(){
+        int numarAniExperienta;
+        return numarAniExperienta;
+    }
 
     public boolean addMember(Membru member){
         if(numarMembriCurenti<numarMaximMembri) {
@@ -76,3 +79,85 @@ abstract class Echipa{
     protected abstract Object getLider();
 }
 
+class DevTeam extends Echipa{
+    public DevTeam(String nume,int numar){
+        super(nume,numar);
+    }
+    public double getCost(){
+        double cost=0;
+        for(int i=0;i<membri.length();i++){
+            if(membri.equals(lider)){
+                cost=cost+2500+250*lider.getNumarAniExperienta();
+            }
+            else
+                if(getNumarAniExperienta()<2){
+                    cost=cost+1500;
+                }
+                else
+                    if(getNumarAniExperienta()>=2&&getNumarAniExperienta()<=5){
+                        cost=cost+1500+0.25*getNumarAniExperienta();
+                    }
+                    else
+                        cost=cost+1500+0.5*getNumarAniExperienta();
+        }
+        return cost;
+    }
+}
+
+class HR extends Echipa{
+    public HR(String nume,int numar){
+        super(nume,numar);
+    }
+    public double getCost(){
+        double cost=0;
+        for(int i=0;i< membri.length();i++){
+            if(membri.equals(lider)){
+                cost=cost+1350+300*getNumarAniExperienta();
+            }
+            else
+            if(getNumarAniExperienta()<2){
+                cost=cost+1000;
+            }
+            else
+            if(getNumarAniExperienta()>=2&&getNumarAniExperienta()<=5){
+                cost=cost+1000+0.25*getNumarAniExperienta();
+            }
+            else
+                cost=cost+1000+0.5*getNumarAniExperienta();
+        }
+        return cost;
+    }
+}
+
+class main {
+    public static void main(String[] argv){
+        Membru lider_nepotrivit=new Membru("Popescu","Vasile",18,3000,3);
+        Membru lider_potrivit=new Membru("Popescu","Vasile",18,3000,7);
+        Membru mem1=new Membru("Popescu","Vasile",18,3000,7);
+        Membru mem2=new Membru("Popescu","Vasile",18,3000,7);
+        Membru mem3=new Membru("Popescu","Vasile",18,3000,7);
+        Membru mem4=new Membru("Popescu","Vasile",18,3000,7);
+        Membru mem5=new Membru("Popescu","Vasile",18,3000,7);
+        Membru mem6=new Membru("Popescu","Vasile",18,3000,7);
+        Membru mem7=new Membru("Popescu","Vasile",18,3000,7);
+        Membru mem8=new Membru("Popescu","Vasile",18,3000,7);
+        Membru mem9=new Membru("Popescu","Vasile",18,3000,7);
+        Membru mem10=new Membru("Popescu","Vasile",18,3000,7);
+        DevTeam dv=new DevTeam("Lapte gros",34);
+        HR hr=new HR("De ce Audi mananca ulei-_-",72);
+        dv.setLeader(lider_nepotrivit);
+        dv.setLeader(lider_nepotrivit);
+        dv.addMember(Membru);
+        dv.addMember(mem1);
+        dv.addMember(mem2);
+        dv.addMember(mem4);
+        dv.addMember(mem5);
+        hr.addMember(mem6);
+        hr.addMember(mem7);
+        hr.addMember(mem8);
+        hr.addMember(mem9);
+        hr.addMember(mem10);
+        dv.toString();
+        hr.toString();
+    }
+}
